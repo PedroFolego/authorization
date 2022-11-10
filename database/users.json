@@ -7,16 +7,16 @@
       "role": "super_admin"
     },
     {
-      "id": "admin",
-      "email": "admin@admin.com",
-      "password": "admin",
-      "role": "admin"
+      "id": "service_admin",
+      "email": "service_admin@service_admin.com",
+      "password": "service_admin",
+      "role": "service_admin"
     },
     {
-      "id": "admin",
-      "email": "admin@admin.com",
-      "password": "admin",
-      "role": "admin"
+      "id": "user_management_admin",
+      "email": "user_management_admin@user_management_admin.com",
+      "password": "user_management_admin",
+      "role": "user_management_admin"
     }
   ]
 }
