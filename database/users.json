@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "super_admin",
+      "email": "super_admin@super_admin.com",
+      "password": "super_admin",
+      "role": "super_admin"
+    },
+    {
+      "id": "admin",
+      "email": "admin@admin.com",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "admin",
+      "email": "admin@admin.com",
+      "password": "admin",
+      "role": "admin"
+    }
+  ]
+}
