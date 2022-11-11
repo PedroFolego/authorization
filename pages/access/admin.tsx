@@ -1,8 +1,5 @@
 // @ts-nocheck
-import { GetServerSideProps } from "next"
 import { getSession } from "next-auth/react";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import LogoutButton from "../../components/logout-btn";
 
 export default function Admin() {
