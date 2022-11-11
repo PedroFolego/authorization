@@ -1,0 +1,44 @@
+[
+  {
+    "image": "umaImagem.jpeg",
+    "name": "super_admin",
+    "email": "super_admin@super_admin.com",
+    "password": "1234",
+    "role": ["super_admin", "service_admin"]
+  },
+  {
+    "image": "umaImagem.jpeg",
+    "name": "service_admin",
+    "email": "service_admin@service_admin.com",
+    "password": "1234",
+    "role": ["service_admin"]
+  },
+  {
+    "image": "umaImagem.jpeg",
+    "name": "user_management_admin",
+    "email": "user_management_admin@user_management_admin.com",
+    "password": "1234",
+    "role":[ "user_management_admin"]
+  },
+  {
+    "image": "umaImagem.jpeg",
+    "name": "user_bacen",
+    "email": "user_bacen@user_bacen.com",
+    "password": "1234",
+    "role":[ "user_bacen"]
+  },
+  {
+    "image": "umaImagem.jpeg",
+    "name": "user_anbima",
+    "email": "user_anbima@user_anbima.com",
+    "password": "1234",
+    "role":[ "user_anbima"]
+  },
+  {
+    "image": "umaImagem.jpeg",
+    "name": "user_anbima_bacen",
+    "email": "user_anbima_bacen@user_anbima_bacen.com",
+    "password": "1234",
+    "role":[ "user_anbima", "user_bacen" ]
+  }
+]
