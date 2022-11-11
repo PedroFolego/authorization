@@ -2,11 +2,21 @@
 import { getSession } from "next-auth/react";
 import LogoutButton from "../../components/logout-btn";
 
-export default function Bacen({ name }) {
+export default function Ambima() {
   return (
     <>
-      <h1>{name}</h1>
-      <div>Página Bacen</div>
+      <h1>Cadastre um usuário</h1>
+      <form>
+        <label htmlFor="email">
+        Digite o email
+        <input type="email" id="email" />
+        </label>
+        <label htmlFor="password">
+        Digite a senha
+        <input type="password" id="password" />
+        </label>
+        <button type="submit">Cadastrar</button>
+      </form>
       <LogoutButton />
     </>
   );
@@ -20,10 +30,9 @@ export async function getServerSideProps(ctx) {
       redirect: { destination: "/" },
     };
   }
-
   const { user } = session;
-
-  const allowedRoles = ["user_bacen", "service_admin", "super_admin"]
+  
+  const allowedRoles = ["super_admin", "user_management_admin"]
 
   if (!user.role.some((r) => allowedRoles.includes(r))) {
     return {
