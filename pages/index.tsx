@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Head from "next/head";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
@@ -12,6 +13,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
 
   // console.log(session);
+  if (session) {
+    return {
+      redirect: { destination: "/home" },
+    };
+  }
 
   return {
     props: {},
