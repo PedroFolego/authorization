@@ -28,19 +28,12 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
       redirect: '/'
     }
   }
-
-  const adminUser = (role) => {
-    return role.some((r) => r === 'user_management_admin')
-  }
-
-
   
   // console.log(session);
   
   return {
     props: {
-      admin: adminUser(session.user.role),
-      role: session.role
+      role: session.user.role
     }
   }
 }
