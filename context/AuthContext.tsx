@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import { singInRequestData } from "../service/auth";
 import Router from "next/router";
+import { signIn } from "next-auth/react";
 
 type AuthContextType = {
   user: IUser | null;
@@ -29,8 +30,8 @@ export function AuthProvider({ children }: IAuthProvider) {
   const [user, setUser] = useState<IUser | null>(null);
   const isAuth = !!user;
 
-  const singIn = async ({ email, password }: ISingInData) => {
-    const data = await singInRequestData({
+  const signInLogin = async ({ email, password }: ISingInData) => {
+    const data = await signIn({
       email,
       password,
     });
@@ -44,7 +45,7 @@ export function AuthProvider({ children }: IAuthProvider) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, singIn, isAuth }}>
+    <AuthContext.Provider value={{ user, singIn: signInLogin, isAuth }}>
       {children}
     </AuthContext.Provider>
   );

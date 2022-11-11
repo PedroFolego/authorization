@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next"
+import { getSession } from "next-auth/react";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -8,7 +9,13 @@ export default function Admin() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  const session = await getSession({ req });
+
+
+  // console.log(session);
+  
   return {
     props: {
 
