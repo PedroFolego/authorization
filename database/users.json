@@ -4,7 +4,7 @@
     "name": "super_admin",
     "email": "super_admin@super_admin.com",
     "password": "1234",
-    "role": ["super_admin", "service_admin"]
+    "role": ["super_admin"]
   },
   {
     "image": "umaImagem.jpeg",

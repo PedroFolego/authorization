@@ -6,8 +6,8 @@ export default function Ambima({ name }) {
   return (
     <>
       <h1>{name}</h1>
+      <div>Página Anbima</div>
       <LogoutButton />
-      <div>Página Ambima</div>
     </>
   );
 }
@@ -21,9 +21,9 @@ export async function getServerSideProps(ctx) {
     };
   }
 
-  const { user } = session;
+  const allowedRoles = ["user_anbima", "service_admin", "super_admin"]
 
-  if (!user.role.some((r) => r == "user_anbima")) {
+  if (!user.role.some((r) => allowedRoles.includes(r))) {
     return {
       redirect: { destination: "/home" },
     };

@@ -6,7 +6,9 @@ import ButtonBacen from "../components/ButtonBacen";
 import LogoutButton from "../components/logout-btn";
 
 export default function Home({ role, name }) {
+
   const bacen = role.some((r) => r == "user_bacen");
+  const admin = role.some((r) => r == "super_admin");
   const anbima = role.some((r) => r == "user_anbima");
 
   return (
@@ -15,8 +17,8 @@ export default function Home({ role, name }) {
       <h1>Olá {name}</h1>
       <LogoutButton />
       {/* {!!role.userManagement && <ComponentUserManagement/>} */}
-      {!!anbima && <ButtonAnbima />}
-      {!!bacen && <ButtonBacen />}
+      {(!!anbima || !!admin) && <ButtonAnbima />}
+      {(!!bacen || !!admin) && <ButtonBacen />}
     </>
   );
 }

@@ -5,9 +5,9 @@ import LogoutButton from "../../components/logout-btn";
 export default function Bacen({ name }) {
   return (
     <>
-      <LogoutButton />
       <h1>{name}</h1>
       <div>Página Bacen</div>
+      <LogoutButton />
     </>
   );
 }
@@ -23,7 +23,9 @@ export async function getServerSideProps(ctx) {
 
   const { user } = session;
 
-  if (!user.role.some((r) => r == "user_bacen")) {
+  const allowedRoles = ["user_bacen", "service_admin", "super_admin"]
+
+  if (!user.role.some((r) => allowedRoles.includes(r))) {
     return {
       redirect: { destination: "/home" },
     };
