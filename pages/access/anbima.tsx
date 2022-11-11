@@ -20,7 +20,8 @@ export async function getServerSideProps(ctx) {
       redirect: { destination: "/" },
     };
   }
-
+  const { user } = session;
+  
   const allowedRoles = ["user_anbima", "service_admin", "super_admin"]
 
   if (!user.role.some((r) => allowedRoles.includes(r))) {
