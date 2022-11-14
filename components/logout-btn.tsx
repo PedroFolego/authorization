@@ -1,7 +1,7 @@
 import { signOut } from "next-auth/react";
 import Router from "next/router";
 export default function LogoutButton() {
-  const logout = () => {
+  const logout = (): void => {
     signOut();
     Router.push("/");
   };

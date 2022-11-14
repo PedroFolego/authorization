@@ -1,6 +1,7 @@
-// @ts-nocheck
+import { CtxOrReq } from "next-auth/client/_utils";
 import { getSession } from "next-auth/react";
 import LogoutButton from "../../components/logout-btn";
+import { IUserSession } from "../../interfaces";
 
 export default function Ambima() {
   return (
@@ -22,7 +23,7 @@ export default function Ambima() {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: CtxOrReq) {
   const session = await getSession(ctx);
 
   if (!session) {
@@ -32,9 +33,11 @@ export async function getServerSideProps(ctx) {
   }
   const { user } = session;
   
+  const userType = user as IUserSession;
+  
   const allowedRoles = ["super_admin", "user_management_admin"]
 
-  if (!user.role.some((r) => allowedRoles.includes(r))) {
+  if (!userType.role.some((r) => allowedRoles.includes(r))) {
     return {
       redirect: { destination: "/home" },
     };
@@ -42,7 +45,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      name: user?.name,
+      name: userType.name,
     },
   };
 }
