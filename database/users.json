@@ -1,5 +1,6 @@
 [
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "super_admin",
     "email": "super_admin@super_admin.com",
@@ -7,6 +8,7 @@
     "role": ["super_admin"]
   },
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "service_admin",
     "email": "service_admin@service_admin.com",
@@ -14,6 +16,7 @@
     "role": ["service_admin"]
   },
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "user_management_admin",
     "email": "user_management_admin@user_management_admin.com",
@@ -21,6 +24,7 @@
     "role":[ "user_management_admin"]
   },
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "user_bacen",
     "email": "user_bacen@user_bacen.com",
@@ -28,6 +32,7 @@
     "role":[ "user_bacen"]
   },
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "user_anbima",
     "email": "user_anbima@user_anbima.com",
@@ -35,6 +40,7 @@
     "role":[ "user_anbima"]
   },
   {
+    "id": "sacsacscsa",
     "image": "umaImagem.jpeg",
     "name": "user_anbima_bacen",
     "email": "user_anbima_bacen@user_anbima_bacen.com",

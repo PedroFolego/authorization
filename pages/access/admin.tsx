@@ -1,6 +1,8 @@
-// @ts-nocheck
+import { GetServerSideProps } from "next";
+import { CtxOrReq } from "next-auth/client/_utils";
 import { getSession } from "next-auth/react";
 import LogoutButton from "../../components/logout-btn";
+import { IUserSession } from "../../interfaces";
 
 export default function Admin() {
   return (
@@ -8,11 +10,10 @@ export default function Admin() {
       <LogoutButton />
       <div>Página Admin</div>
     </>
-  )
+  );
 }
 
-
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: CtxOrReq) {
   const session = await getSession(ctx);
 
   if (!session) {
@@ -23,7 +24,9 @@ export async function getServerSideProps(ctx) {
 
   const { user } = session;
 
-  if (!user.role.some((r) => r == "user_admin")) {
+  const userType = user as IUserSession;
+
+  if (!userType.role.some((r) => r == "user_admin")) {
     return {
       redirect: { destination: "/home" },
     };
@@ -31,7 +34,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      name: user?.name,
+      name: userType.name,
     },
   };
 }

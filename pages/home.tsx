@@ -1,11 +1,11 @@
-// @ts-nocheck
-import { GetServerSideProps } from "next";
+import { CtxOrReq } from "next-auth/client/_utils";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import ButtonAnbima from "../components/ButtonAnbima";
 import ButtonBacen from "../components/ButtonBacen";
 import ButtonManagement from "../components/ButtonManagement";
 import LogoutButton from "../components/logout-btn";
+import { IUserSession } from "../interfaces";
 
 const roles = [
   "user_bacen",
@@ -15,11 +15,24 @@ const roles = [
   "service_admin",
 ];
 
-export default function Home({ role, name }) {
-  const [rolesState, setRolesState] = useState({});
+type IHome = {
+  role: string[];
+  name: string;
+};
+
+type rolesAccess = {
+  user_anbima: string;
+  user_management_admin: string;
+  service_admin: string;
+  user_bacen: string;
+  super_admin: string;
+};
+
+export default function Home({ role, name }: IHome) {
+  const [rolesState, setRolesState] = useState<rolesAccess>({} as rolesAccess);
 
   useEffect(() => {
-    let auxObj = {};
+    let auxObj = {} as rolesAccess;
     roles.forEach((option) => {
       role.some((r) => r == option) &&
         (auxObj = { ...auxObj, [option]: !!option });
@@ -28,16 +41,16 @@ export default function Home({ role, name }) {
   }, [role]);
 
   const {
-    user_anbima,
-    user_management_admin,
-    service_admin,
-    user_bacen,
-    super_admin,
+    user_anbima: userAnbima,
+    user_management_admin: userManagementAdmin,
+    service_admin: serviceAdmin,
+    user_bacen: userBacen,
+    super_admin: superAdmin,
   } = rolesState;
 
-  const ambimaUser = user_anbima || service_admin || super_admin;
-  const bacenUser = user_bacen || service_admin || super_admin;
-  const managementUser = user_management_admin || super_admin;
+  const ambimaUser = userAnbima || serviceAdmin || superAdmin;
+  const bacenUser = userBacen || serviceAdmin || superAdmin;
+  const managementUser = userManagementAdmin || superAdmin;
 
   return (
     <>
@@ -52,20 +65,22 @@ export default function Home({ role, name }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps = async ({ req }: CtxOrReq) => {
   const session = await getSession({ req });
 
-  if (!session) {
+  if (!session || !session.user) {
     return {
       redirect: { destination: "/" },
     };
   }
-  console.log(session.user);
+  const { user } = session;
+
+  const userType = user as IUserSession;
 
   return {
     props: {
-      role: session.user.role,
-      name: session.user.name,
+      role: userType.role,
+      name: userType.name,
     },
   };
 };

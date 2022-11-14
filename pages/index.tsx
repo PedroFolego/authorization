@@ -1,11 +1,10 @@
-// @ts-nocheck
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { GetServerSideProps } from "next";
-import { getSession, LiteralUnion, signIn } from "next-auth/react";
-import Router, { useRouter } from "next/router";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { getSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { CtxOrReq } from "next-auth/client/_utils";
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps = async ({ req }: CtxOrReq) => {
   const session = await getSession({ req });
 
   if (session) {
@@ -21,10 +20,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
-  // const { user, singIn, isAuth } = useContext(AuthContext);
   const [errorLogin, setErrorLogin] = useState(false);
   const router = useRouter();
-  const handleCheck = async (data: any) => {
+  const handleCheck: SubmitHandler<FieldValues> = async (data) => {
     const { email, password } = data;
 
     const req = await signIn("credentials", {
@@ -33,7 +31,7 @@ export default function Login() {
       redirect: false,
     });
 
-    if (req.error) {
+    if (req?.error) {
       setErrorLogin(true);
       return;
     }
