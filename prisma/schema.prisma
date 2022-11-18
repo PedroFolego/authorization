@@ -6,30 +6,32 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = "mongodb://localhost:27017/poc"
 }
 
 model User {
-  id        Int @id @default(autoincrement())
-  email     String @unique
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  email     String    @unique
   name      String?
   password  String
   image     String?
-  roles     UserRole[]
+
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  
+  roleIds   String[]  @db.ObjectId
+  roles     Role[]    @relation(fields: [roleIds], references: [id])
 }
 
 model Role {
-  id        Int @id @default(autoincrement())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  tag       String    @unique
   name      String
-  users     UserRole[]
-}
 
-model UserRole {
-  role      Role @relation(fields: [roleId], references: [id])
-  roleId    Int
-  user      User @relation(fields: [userId], references: [id])
-  userId    Int
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
 
-  @@id([userId, roleId])
+  userIds   String[]  @db.ObjectId
+  users     User[]    @relation(fields: [userIds], references: [id])
 }
