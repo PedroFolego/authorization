@@ -28,6 +28,26 @@ type rolesAccess = {
   super_admin: string;
 };
 
+export const getServerSideProps = async ({ req }: CtxOrReq) => {
+  const session = await getSession({ req });
+
+  if (!session?.user) {
+    return {
+      redirect: { destination: "/" },
+    };
+  }
+
+  const userType = session.user as IUserSession;
+
+  return {
+    props: {
+      role: userType.role,
+      name: userType.name,
+    },
+  };
+};
+
+
 export default function Home({ role, name }: IHome) {
   const [rolesState, setRolesState] = useState<rolesAccess>({} as rolesAccess);
 
@@ -65,22 +85,3 @@ export default function Home({ role, name }: IHome) {
   );
 }
 
-export const getServerSideProps = async ({ req }: CtxOrReq) => {
-  const session = await getSession({ req });
-
-  if (!session || !session.user) {
-    return {
-      redirect: { destination: "/" },
-    };
-  }
-  const { user } = session;
-
-  const userType = user as IUserSession;
-
-  return {
-    props: {
-      role: userType.role,
-      name: userType.name,
-    },
-  };
-};
