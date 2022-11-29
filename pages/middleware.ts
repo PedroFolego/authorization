@@ -1,5 +1,14 @@
-import { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
-export const middleware = (req: NextRequest) => {
-  // const token = 
+const redirect = (path: string, req: NextRequest) => NextResponse.redirect(new URL(path, req.url));
+
+export const middleware = async (req: NextRequest) => {
+  const token = await getToken({
+    req,
+    secret: process.env.TOKEN
+  });
+  if (!token) return redirect('/', req);
+
+  return NextResponse.next();
 }
