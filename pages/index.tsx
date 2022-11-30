@@ -5,14 +5,6 @@ import { useRouter } from "next/router";
 import { CtxOrReq } from "next-auth/client/_utils";
 
 export const getServerSideProps = async ({ req }: CtxOrReq) => {
-  const session = await getSession({ req });
-
-  if (session) {
-    return {
-      redirect: { destination: "/home" },
-    };
-  }
-
   return {
     props: {},
   };

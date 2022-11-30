@@ -42,11 +42,8 @@ export default NextAuth({
     async session({ session, token }) {
       const { user } = session;
       if (token) {
-        const data = users.find((u) => u.email === user?.email) as IUserSession;
 
-        const { role } = data;
         session.user = {
-          role,
           ...session.user,
         } as IUserSession;
       }
@@ -56,8 +53,8 @@ export default NextAuth({
   session: {
     maxAge: 60 * 60 * 24,
   },
-  secret: "1234batata",
+  secret: process.env.TOKEN,
   jwt: {
-    secret: "1234batata",
+    secret: process.env.TOKEN,
   },
 });
