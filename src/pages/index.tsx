@@ -3,6 +3,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { CtxOrReq } from "next-auth/client/_utils";
+import { trpc } from '../utils/trpc';
 
 export const getServerSideProps = async ({ req }: CtxOrReq) => {
   return {
@@ -11,6 +12,7 @@ export const getServerSideProps = async ({ req }: CtxOrReq) => {
 };
 
 export default function Login() {
+  const hello = trpc.hello.useQuery({ text: 'client' });
   const { register, handleSubmit } = useForm();
   const [errorLogin, setErrorLogin] = useState(false);
   const router = useRouter();
@@ -42,6 +44,7 @@ export default function Login() {
         <input type='text' {...register("password")} />
       </label>
       <button type='submit'>Login</button>
+      <p>{hello?.data?.greeting}</p>
       {errorLogin && <span>Login Inválido</span>}
     </form>
   );

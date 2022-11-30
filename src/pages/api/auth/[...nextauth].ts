@@ -1,6 +1,6 @@
 import NextAuth, { User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import users from "../../../database/users.json";
+import users from "../../../../database/users.json";
 import { IUserSession } from "../../../interfaces";
 
 export default NextAuth({
