@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "strictNullChecks": true,
+    "strict": true,
     "target": "esnext",  // "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
